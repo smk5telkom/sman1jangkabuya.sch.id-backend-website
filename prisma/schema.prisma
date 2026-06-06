@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+enum Role {
+  SuperAdmin
+  Admin
+}
+
+model Users {
+  id       Int     @id @default(autoincrement())
+  username String  @unique
+  email    String  @unique
+  name     String?
+  role     Role    @default(Admin)
+  password String
+
+  refreshToken  String?
+  posts         Posts[]
+  announcements Announcements[]
+}
+
+model Posts {
+  id        Int      @id @default(autoincrement())
+  title     String
+  slug      String   @unique
+  content   String   @db.Text
+  imageUrl  String?
+  createdAt DateTime @default(now())
+
+  postById Int
+  postBy   Users @relation(fields: [postById], references: [id])
+}
+
+enum Type {
+  Button
+  Link
+}
+
+model Announcements {
+  id          Int      @id @default(autoincrement())
+  title       String
+  slug        String   @unique
+  content     String   @db.Text
+  type        Type     @default(Button)
+  typeTitle   String?
+  typeContent String
+  createdAt   DateTime @default(now())
+
+  postById Int
+  postBy   Users @relation(fields: [postById], references: [id])
+}
+
+enum Level {
+  Kabupaten
+  Provinsi
+  Nasional
+  Internasional
+  Umum
+}
+
+model Achievement {
+  id          Int      @id @default(autoincrement())
+  title       String
+  subtitle    String
+  description String   @db.Text
+  level       Level
+  imageUrl    String
+  createdAt   DateTime @default(now())
+}
