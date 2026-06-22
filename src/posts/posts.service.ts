@@ -32,7 +32,7 @@ export class PostsService {
 
       slug = `${slug}-${count + 1}`;
     }
-    // return 'This action adds a new post';
+
     const newPost = await this.prisma.posts.create({
       data: {
         ...createPostDto,
@@ -46,7 +46,6 @@ export class PostsService {
   }
 
   async findAll() {
-    // return `This action returns all posts`;
     return await this.prisma.posts.findMany({
       orderBy: {
         createdAt: 'asc',
@@ -55,7 +54,6 @@ export class PostsService {
   }
 
   async findOne(id: number) {
-    // return `This action returns a #${id} post`;
     return await this.prisma.posts.findUnique({
       where: { id },
       include: {
@@ -85,11 +83,59 @@ export class PostsService {
     });
   }
 
-  update(id: number, updatePostDto: UpdatePostDto) {
-    return `This action updates a #${id} post`;
+  async update(id: number, dto: UpdatePostDto, imageUrl?: string) {
+    const data: any = {
+      ...dto
+    }
+
+    if (imageUrl) {
+      data.imageUrl = imageUrl
+    }
+
+    if (dto.title) {
+      let slug = slugify(dto.title, {
+        lower: true,
+        strict: true,
+      })
+
+      const exist = await this.prisma.posts.findFirst({
+        where: {
+          slug,
+          NOT: {
+            id
+          },
+        },
+      });
+
+      if (exist) {
+        const count = await this.prisma.posts.count({
+          where: {
+            slug: {
+              startsWith: slug,
+            },
+            NOT: {
+              id,
+            },
+          },
+        });
+
+        slug = `${slug}-${count + 1}`
+      }
+
+      data.slug = slug
+    }
+
+    return await this.prisma.posts.update({
+      where: { id },
+      data
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} post`;
+    return this.prisma.posts.delete({
+      where: {
+        id,
+      }
+    });
   }
 }

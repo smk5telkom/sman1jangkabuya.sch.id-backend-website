@@ -39,7 +39,6 @@ export class AnnouncementsService {
   }
 
   async findAll() {
-    // return `This action returns all announcements`;
     return await this.prisma.announcements.findMany({
       orderBy: {
         createdAt: 'desc',
@@ -66,11 +65,55 @@ export class AnnouncementsService {
     return `This action returns a #${id} announcement`;
   }
 
-  update(id: number, updateAnnouncementDto: UpdateAnnouncementDto) {
-    return `This action updates a #${id} announcement`;
+  async update(id: number, dto: UpdateAnnouncementDto) {
+    const data: any = {
+      ...dto,
+    }
+
+    if (dto.title) {
+      let slug = slugify(dto.title, {
+        lower: true,
+        strict: true,
+      })
+
+      const exist = await this.prisma.announcements.findFirst({
+        where: {
+          slug,
+          NOT: {
+            id
+          },
+        },
+      });
+
+      if (exist) {
+        const count = await this.prisma.announcements.count({
+          where: {
+            slug: {
+              startsWith: slug,
+            },
+            NOT: {
+              id,
+            },
+          },
+        });
+
+        slug = `${slug}-${count + 1}`
+      }
+
+      data.slug = slug
+    }
+
+    return await this.prisma.announcements.update({
+      where: { id },
+      data
+    })
   }
 
   remove(id: number) {
-    return `This action removes a #${id} announcement`;
+    return this.prisma.announcements.delete({
+      where: {
+        id,
+      },
+    });
   }
 }

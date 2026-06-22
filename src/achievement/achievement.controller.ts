@@ -64,8 +64,33 @@ export class AchievementController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAchievementDto: UpdateAchievementDto) {
-    return this.achievementService.update(+id, updateAchievementDto);
+  @UseInterceptors(
+    FileInterceptor('image', {
+      storage: diskStorage({
+        destination: './uploads/achievements',
+        filename: (req, file, cb) => {
+          const uniqueName = Date.now() + '-' + Math.round(Math.random() * 1e9);
+          cb(null, uniqueName + extname(file.originalname));
+        },
+      }),
+      fileFilter: (req, file, cb) => {
+        if (!file.mimetype.match(/\/(jpg|jpeg|png|webp)$/)) {
+          return cb(new Error('File harus gambar'), false);
+        }
+        cb(null, true);
+      },
+      limits: {
+        fileSize: 2 * 1024 * 1024,
+      },
+    }),
+  )
+  update(
+    @Param('id') id: string,
+    @Body() updateAchievementDto: UpdateAchievementDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    const imageUrl = file ? `/uploads/achievements/${file.filename}` : undefined;
+    return this.achievementService.update(+id, updateAchievementDto, imageUrl);
   }
 
   @Delete(':id')

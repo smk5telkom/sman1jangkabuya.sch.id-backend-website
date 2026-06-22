@@ -29,11 +29,28 @@ export class AchievementService {
     return `This action returns a #${id} achievement`;
   }
 
-  update(id: number, updateAchievementDto: UpdateAchievementDto) {
-    return `This action updates a #${id} achievement`;
+  async update(id: number, dto: UpdateAchievementDto, imageUrl?: string) {
+    const data: any = {
+      ...dto
+    }
+
+    if (imageUrl) {
+      data.imageUrl = imageUrl;
+    }
+
+    return await this.prisma.achievement.update({
+      where: {
+        id,
+      },
+      data
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} achievement`;
+  async remove(id: number) {
+    return this.prisma.achievement.delete({
+      where: {
+        id,
+      },
+    });
   }
 }
