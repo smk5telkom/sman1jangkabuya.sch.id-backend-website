@@ -7,12 +7,22 @@ import { PrismaService } from '../prisma/prisma.service';
 export class AchievementService {
   constructor(private prisma: PrismaService) {}
 
-  async create(dto: CreateAchievementDto) {
-    return await this.prisma.achievement.create({ data: dto });
+  async create(dto: CreateAchievementDto, imageUrl: string) {
+    return await this.prisma.achievement.create({
+      data:
+      {
+        ...dto,
+        imageUrl
+      }
+    });
   }
 
-  findAll() {
-    return `This action returns all achievement`;
+  async findAll() {
+    return await this.prisma.achievement.findMany({
+      orderBy: {
+        createdAt: 'desc'
+      }
+    });
   }
 
   findOne(id: number) {

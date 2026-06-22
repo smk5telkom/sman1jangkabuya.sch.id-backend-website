@@ -69,7 +69,7 @@ export class PostsController {
   // }
 
   @Public()
-  @Get(':slug')
+  @Get('slug/:slug')
   findSlug(@Param('slug') slug: string) {
     return this.postsService.findSlug(slug);
   }

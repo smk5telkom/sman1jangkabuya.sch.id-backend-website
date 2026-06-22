@@ -13,7 +13,4 @@ export class CreateAchievementDto {
 
   @IsEnum(Level)
   level: Level;
-
-  @IsString()
-  imageUrl: string;
 }
