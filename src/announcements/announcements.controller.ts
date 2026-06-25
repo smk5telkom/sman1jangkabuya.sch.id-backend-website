@@ -33,10 +33,11 @@ export class AnnouncementsController {
     return this.announcementsService.findAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.announcementsService.findOne(+id);
-  // }
+  @Public()
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.announcementsService.findOne(+id);
+  }
 
   @Public()
   @Get('slug/:slug')

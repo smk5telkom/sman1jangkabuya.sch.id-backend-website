@@ -58,6 +58,7 @@ export class AchievementController {
     return this.achievementService.findAll();
   }
 
+  @Public()
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.achievementService.findOne(+id);

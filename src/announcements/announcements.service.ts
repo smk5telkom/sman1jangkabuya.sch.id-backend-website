@@ -61,8 +61,12 @@ export class AnnouncementsService {
     });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} announcement`;
+  async findOne(id: number) {
+    return await this.prisma.announcements.findUnique({
+      where: {
+        id
+      }
+    });
   }
 
   async update(id: number, dto: UpdateAnnouncementDto) {

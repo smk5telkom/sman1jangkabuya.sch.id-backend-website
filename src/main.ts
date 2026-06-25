@@ -14,8 +14,13 @@ async function bootstrap() {
     prefix: '/uploads/',
   });
 
+  app.enableCors({
+    origin: 'http://localhost:3001', // Izinkan port Nuxt
+    credentials: true,
+  });
+  app.use(cookieParser());
+
   await app.listen(process.env.PORT ?? 3000);
 
-  app.use(cookieParser());
 }
 bootstrap();

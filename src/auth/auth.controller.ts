@@ -36,7 +36,8 @@ export class AuthController {
     }
   }
 
-  @Post('refresh')
+  @Public()
+  @Get('refresh')
   async refresh(
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,

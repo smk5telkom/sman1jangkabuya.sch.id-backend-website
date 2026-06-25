@@ -62,11 +62,11 @@ export class PostsController {
     return this.postsService.findAll();
   }
 
-  // @Public()
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.postsService.findOne(+id);
-  // }
+  @Public()
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.postsService.findOne(+id);
+  }
 
   @Public()
   @Get('slug/:slug')
@@ -100,7 +100,7 @@ export class PostsController {
     @Body() updatePostDto: UpdatePostDto,
     @UploadedFile() file: Express.Multer.File,
   ) {
-    const imageUrl = file ? `./uploads/posts/${file.filename}` : undefined;
+    const imageUrl = file ? `/uploads/posts/${file.filename}` : undefined;
     return this.postsService.update(+id, updatePostDto, imageUrl);
   }
 

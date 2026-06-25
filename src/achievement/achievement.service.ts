@@ -25,8 +25,12 @@ export class AchievementService {
     });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} achievement`;
+  async findOne(id: number) {
+    return this.prisma.achievement.findUnique({
+      where: {
+        id
+      }
+    });
   }
 
   async update(id: number, dto: UpdateAchievementDto, imageUrl?: string) {
