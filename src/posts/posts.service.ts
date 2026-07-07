@@ -66,7 +66,7 @@ export class PostsService {
         },
       },
     });
-  }
+  } 
 
   async findSlug(slug: string) {
     return await this.prisma.posts.findFirst({
