@@ -15,7 +15,7 @@ async function bootstrap() {
   });
 
   app.enableCors({
-    origin: 'http://localhost:3001', // Izinkan port Nuxt
+    origin: process.env.FRONTEND_URL || 'http://localhost:3001', // Izinkan port Nuxt
     credentials: true,
   });
   app.use(cookieParser());
