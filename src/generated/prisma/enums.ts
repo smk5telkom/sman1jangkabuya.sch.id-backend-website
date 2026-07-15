@@ -34,3 +34,11 @@ export const Level = {
 } as const
 
 export type Level = (typeof Level)[keyof typeof Level]
+
+
+export const Gender = {
+  LakiLaki: 'LakiLaki',
+  Perempuan: 'Perempuan'
+} as const
+
+export type Gender = (typeof Gender)[keyof typeof Gender]

@@ -59,3 +59,8 @@ export type Announcements = Prisma.AnnouncementsModel
  * 
  */
 export type Achievement = Prisma.AchievementModel
+/**
+ * Model Alumni
+ * 
+ */
+export type Alumni = Prisma.AlumniModel

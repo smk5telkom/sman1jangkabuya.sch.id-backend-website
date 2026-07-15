@@ -387,7 +387,8 @@ export const ModelName = {
   Users: 'Users',
   Posts: 'Posts',
   Announcements: 'Announcements',
-  Achievement: 'Achievement'
+  Achievement: 'Achievement',
+  Alumni: 'Alumni'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -403,7 +404,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "users" | "posts" | "announcements" | "achievement"
+    modelProps: "users" | "posts" | "announcements" | "achievement" | "alumni"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -671,6 +672,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Alumni: {
+      payload: Prisma.$AlumniPayload<ExtArgs>
+      fields: Prisma.AlumniFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AlumniFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlumniPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AlumniFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlumniPayload>
+        }
+        findFirst: {
+          args: Prisma.AlumniFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlumniPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AlumniFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlumniPayload>
+        }
+        findMany: {
+          args: Prisma.AlumniFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlumniPayload>[]
+        }
+        create: {
+          args: Prisma.AlumniCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlumniPayload>
+        }
+        createMany: {
+          args: Prisma.AlumniCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.AlumniDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlumniPayload>
+        }
+        update: {
+          args: Prisma.AlumniUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlumniPayload>
+        }
+        deleteMany: {
+          args: Prisma.AlumniDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AlumniUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.AlumniUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AlumniPayload>
+        }
+        aggregate: {
+          args: Prisma.AlumniAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAlumni>
+        }
+        groupBy: {
+          args: Prisma.AlumniGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AlumniGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AlumniCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AlumniCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -764,6 +831,24 @@ export const AchievementScalarFieldEnum = {
 export type AchievementScalarFieldEnum = (typeof AchievementScalarFieldEnum)[keyof typeof AchievementScalarFieldEnum]
 
 
+export const AlumniScalarFieldEnum = {
+  id: 'id',
+  nis: 'nis',
+  namaLengkap: 'namaLengkap',
+  jenisKelamin: 'jenisKelamin',
+  tanggalLahir: 'tanggalLahir',
+  tahunLulus: 'tahunLulus',
+  riwayatPendidikanPekerjaan: 'riwayatPendidikanPekerjaan',
+  alamat: 'alamat',
+  email: 'email',
+  noHp: 'noHp',
+  foto: 'foto',
+  createdAt: 'createdAt'
+} as const
+
+export type AlumniScalarFieldEnum = (typeof AlumniScalarFieldEnum)[keyof typeof AlumniScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -822,6 +907,19 @@ export const AchievementOrderByRelevanceFieldEnum = {
 export type AchievementOrderByRelevanceFieldEnum = (typeof AchievementOrderByRelevanceFieldEnum)[keyof typeof AchievementOrderByRelevanceFieldEnum]
 
 
+export const AlumniOrderByRelevanceFieldEnum = {
+  nis: 'nis',
+  namaLengkap: 'namaLengkap',
+  riwayatPendidikanPekerjaan: 'riwayatPendidikanPekerjaan',
+  alamat: 'alamat',
+  email: 'email',
+  noHp: 'noHp',
+  foto: 'foto'
+} as const
+
+export type AlumniOrderByRelevanceFieldEnum = (typeof AlumniOrderByRelevanceFieldEnum)[keyof typeof AlumniOrderByRelevanceFieldEnum]
+
+
 
 /**
  * Field references
@@ -867,6 +965,13 @@ export type EnumTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'Level'
  */
 export type EnumLevelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Level'>
+    
+
+
+/**
+ * Reference to a field of type 'Gender'
+ */
+export type EnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender'>
     
 
 
@@ -990,6 +1095,7 @@ export type GlobalOmitConfig = {
   posts?: Prisma.PostsOmit
   announcements?: Prisma.AnnouncementsOmit
   achievement?: Prisma.AchievementOmit
+  alumni?: Prisma.AlumniOmit
 }
 
 /* Types for Logging */

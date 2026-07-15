@@ -54,7 +54,8 @@ export const ModelName = {
   Users: 'Users',
   Posts: 'Posts',
   Announcements: 'Announcements',
-  Achievement: 'Achievement'
+  Achievement: 'Achievement',
+  Alumni: 'Alumni'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -127,6 +128,24 @@ export const AchievementScalarFieldEnum = {
 export type AchievementScalarFieldEnum = (typeof AchievementScalarFieldEnum)[keyof typeof AchievementScalarFieldEnum]
 
 
+export const AlumniScalarFieldEnum = {
+  id: 'id',
+  nis: 'nis',
+  namaLengkap: 'namaLengkap',
+  jenisKelamin: 'jenisKelamin',
+  tanggalLahir: 'tanggalLahir',
+  tahunLulus: 'tahunLulus',
+  riwayatPendidikanPekerjaan: 'riwayatPendidikanPekerjaan',
+  alamat: 'alamat',
+  email: 'email',
+  noHp: 'noHp',
+  foto: 'foto',
+  createdAt: 'createdAt'
+} as const
+
+export type AlumniScalarFieldEnum = (typeof AlumniScalarFieldEnum)[keyof typeof AlumniScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -183,4 +202,17 @@ export const AchievementOrderByRelevanceFieldEnum = {
 } as const
 
 export type AchievementOrderByRelevanceFieldEnum = (typeof AchievementOrderByRelevanceFieldEnum)[keyof typeof AchievementOrderByRelevanceFieldEnum]
+
+
+export const AlumniOrderByRelevanceFieldEnum = {
+  nis: 'nis',
+  namaLengkap: 'namaLengkap',
+  riwayatPendidikanPekerjaan: 'riwayatPendidikanPekerjaan',
+  alamat: 'alamat',
+  email: 'email',
+  noHp: 'noHp',
+  foto: 'foto'
+} as const
+
+export type AlumniOrderByRelevanceFieldEnum = (typeof AlumniOrderByRelevanceFieldEnum)[keyof typeof AlumniOrderByRelevanceFieldEnum]
 

@@ -79,3 +79,23 @@ model Achievement {
   imageUrl    String
   createdAt   DateTime @default(now())
 }
+
+enum Gender {
+  LakiLaki
+  Perempuan
+}
+
+model Alumni {
+  id                     Int      @id @default(autoincrement())
+  nis                    String   @unique
+  namaLengkap            String
+  jenisKelamin           Gender
+  tanggalLahir           DateTime
+  tahunLulus             Int
+  riwayatPendidikanPekerjaan String? @db.Text
+  alamat                 String   @db.Text
+  email                  String
+  noHp                   String
+  foto                   String?
+  createdAt              DateTime @default(now())
+}

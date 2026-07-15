@@ -7,6 +7,7 @@ import { PostsModule } from './posts/posts.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { AnnouncementsModule } from './announcements/announcements.module';
 import { AchievementModule } from './achievement/achievement.module';
+import { AlumniModule } from './alumni/alumni.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { AchievementModule } from './achievement/achievement.module';
     PrismaModule,
     AnnouncementsModule,
     AchievementModule,
+    AlumniModule,
   ],
   controllers: [AppController],
   providers: [AppService],
