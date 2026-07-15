@@ -21,6 +21,7 @@ import { UpdateAlumniDto } from './dto/update-alumni.dto';
 export class AlumniController {
   constructor(private readonly alumniService: AlumniService) {}
 
+  @Public()
   @Post()
   @UseInterceptors(
     FileInterceptor('foto', {
