@@ -1,6 +1,3 @@
--- CreateEnum
-CREATE TYPE `Gender` AS ENUM ('LakiLaki', 'Perempuan');
-
 -- CreateTable
 CREATE TABLE `Alumni` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
