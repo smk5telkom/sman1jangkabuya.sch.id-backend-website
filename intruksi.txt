@@ -1,0 +1,35 @@
+INSTRUKSI DEPLOY - MODUL ALUMNI
+=================================
+
+1. Git pull
+   git pull
+
+2. Tandai migration yang sudah ada sebagai applied
+   (karena database sudah berisi tabel-tabel lama)
+
+   npx prisma migrate resolve --applied "20260427030055_init"
+   npx prisma migrate resolve --applied "20260502005114_add_posts"
+   npx prisma migrate resolve --applied "20260502053944_add_post_author"
+   npx prisma migrate resolve --applied "20260506013604_add_announcements"
+   npx prisma migrate resolve --applied "20260506013841_add_role_and_announcements"
+   npx prisma migrate resolve --applied "20260506015128_add_typpec"
+   npx prisma migrate resolve --applied "20260506023216_add_type_title"
+   npx prisma migrate resolve --applied "20260506035014_init"
+   npx prisma migrate resolve --applied "20260506035800_slug"
+   npx prisma migrate resolve --applied "20260525011557_achievement"
+
+3. Jika sebelumnya gagal, rollback migration yang gagal
+   npx prisma migrate resolve --rolled-back "20260715000000_add_alumni"
+
+4. Deploy migration baru (tabel Alumni)
+   npx prisma migrate deploy
+
+5. Generate ulang Prisma Client
+   npx prisma generate
+
+6. Buat folder upload alumni
+   mkdir -p uploads/alumni
+
+7. Restart aplikasi
+   pm2 restart all
+   (atau sesuaikan dengan process manager yang dipakai)

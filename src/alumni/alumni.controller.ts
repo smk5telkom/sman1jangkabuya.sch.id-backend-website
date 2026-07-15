@@ -97,3 +97,4 @@ export class AlumniController {
     return this.alumniService.remove(+id);
   }
 }
+

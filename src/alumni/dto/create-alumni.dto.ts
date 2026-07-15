@@ -1,4 +1,5 @@
 import { IsString, IsEnum, IsDateString, IsInt, IsOptional } from 'class-validator';
+import { Type } from 'class-transformer';
 import { Gender } from '../../generated/prisma/enums';
 
 export class CreateAlumniDto {
@@ -15,6 +16,7 @@ export class CreateAlumniDto {
   tanggalLahir: string;
 
   @IsInt()
+  @Type(() => Number)
   tahunLulus: number;
 
   @IsOptional()
